@@ -15,7 +15,7 @@ intermittent.
 
 ## Public source snapshot
 
-The research-critical implementation is available in [`core/`](core/):
+The research-critical implementation is available in [`code/core/`](code/core/):
 
 - stereo frame construction and visual tracking;
 - DVL--gyro preintegration;
@@ -30,9 +30,15 @@ not guaranteed to build as a standalone repository. The original integration
 also requires the corresponding AQUA-SLAM/ORB-SLAM3 dependencies, g2o, sensor
 calibration, and runtime configuration.
 
-The adaptive visual-quality-aware branch retained in `core/src/Tracking.cc`
+The adaptive visual-quality-aware branch retained in `code/core/src/Tracking.cc`
 is disabled with `#if 0`; it records a future design and was not used for the
 reported experiments.
+
+## Repository layout
+
+- `code/`: source code and code-specific documentation.
+- `datasets/`: reserved for datasets and dataset documentation to be added in
+  a future release.
 
 ## Availability
 
