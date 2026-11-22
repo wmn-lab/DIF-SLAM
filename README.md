@@ -15,12 +15,12 @@ intermittent.
 
 ## Public source snapshot
 
-The research-critical implementation is available in [`code/core/`](code/core/):
+The public snapshot in [`code/core/`](code/core/) includes:
 
 - stereo frame construction and visual tracking;
 - DVL--gyro preintegration;
 - pose optimization and depth-prior edges;
-- keyframe-level DVL--IMU bundle adjustment;
+- keyframe-level DVL--IMU bundle adjustment and adaptive depth-factor weighting;
 - local mapping, keyframe, map, and optimization types.
 
 This is a source snapshot for inspection and research reference. It does not
@@ -30,9 +30,15 @@ not guaranteed to build as a standalone repository. The original integration
 also requires the corresponding AQUA-SLAM/ORB-SLAM3 dependencies, g2o, sensor
 calibration, and runtime configuration.
 
-The adaptive visual-quality-aware branch retained in `code/core/src/Tracking.cc`
-is disabled with `#if 0`; it records a future design and was not used for the
-reported experiments.
+The adaptive depth-factor weighting described in the manuscript is implemented
+in keyframe-level local bundle adjustment in
+[`DvlGyroOptimizer.cpp`](code/core/src/DvlGyroOptimizer.cpp). This code adjusts
+the depth-factor weight using normalized depth-residual statistics and the
+fraction of local keyframes with degraded visual tracking.
+
+A separate frame-level optimizer-switching prototype in
+[`Tracking.cc`](code/core/src/Tracking.cc) remains disabled with `#if 0`.
+That prototype was not used in the reported experiments.
 
 ## Repository layout
 
@@ -42,9 +48,8 @@ reported experiments.
 
 ## Availability
 
-The manuscript describing this work is currently under review. Additional
-configuration files, evaluation tools, and supplementary materials will be
-released after the paper is accepted for publication.
+The complete experiment configurations, evaluation tools, and UVDA-Sim dataset
+will be released upon acceptance of the paper.
 
 ## Attribution
 
